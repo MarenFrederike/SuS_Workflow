@@ -7,6 +7,8 @@
 #include "driverlib/gpio.h"
 #include "driverlib/timer.h"
 #include <math.h>
+#include <stdio.h>
+
 
 
 // Praeprozessor-Makros
@@ -67,12 +69,12 @@ void adcIntHandler (void){
    //therefore array with N=1000, the input from the ADC is in form of an int
 
    int ringBuffer [1000];
-   int k, j;
+
    //save the squared inputs, read 1ooo Samples and store them in array
    //before start averaging, store 1000 values
-   int i;
-   for (int i = 0,; i<= 999; i++){
-       ringBuffer[i] = pow(adcInputValue,2);
+   uint32_t i=0;
+   for (i; i<= 999; i++){
+       ringBuffer[i] = adcInputValue*adcInputValue;
        //use adc*adc instead? faster?
    }
 
@@ -81,6 +83,7 @@ void adcIntHandler (void){
    //build first sum
 
    uint32_t sum = 0;
+   int j = 0;
    for (int j = 0; j<=999; j++){
        sum = sum + ringBuffer[j];
    }
