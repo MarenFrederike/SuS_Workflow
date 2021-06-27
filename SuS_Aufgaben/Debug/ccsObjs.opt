@@ -1,0 +1,1 @@
+"./main.obj" "./tm4c123bh6pm_startup_ccs.obj" "../driverlib.lib" "../tm4c123bh6pm.cmd" -llibc.a 
