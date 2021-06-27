@@ -62,7 +62,7 @@ void setup(void){// konfiguriert den MiKrocontroller
 }
 
 void adcIntHandler (void){
-   uint32_t adcInputValue;
+   volatile uint32_t adcInputValue;
    ADCSequenceDataGet(ADC0_BASE,3,&adcInputValue);
    // Bitte Code hier einfuegen
    // initialize the array needed for the ring buffer, we always want to build the average of 1000 elements
@@ -72,8 +72,7 @@ void adcIntHandler (void){
 
    //save the squared inputs, read 1ooo Samples and store them in array
    //before start averaging, store 1000 values
-   uint32_t i=0;
-   for (i; i<= 999; i++){
+   for (int i = 0; i<= 999; i++){
        ringBuffer[i] = adcInputValue*adcInputValue;
        //use adc*adc instead? faster?
    }
@@ -83,7 +82,6 @@ void adcIntHandler (void){
    //build first sum
 
    uint32_t sum = 0;
-   int j = 0;
    for (int j = 0; j<=999; j++){
        sum = sum + ringBuffer[j];
    }
