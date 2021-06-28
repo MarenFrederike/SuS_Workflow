@@ -98,8 +98,6 @@ void adcIntHandler (void){
 
        }
    }
-
-
    // am Ende von adcIntHandler, Interrupt-Flag loeschen
    ADCIntClear(ADC0_BASE,3);
 }
